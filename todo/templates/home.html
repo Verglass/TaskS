@@ -1,4 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>home</h1>
+    <div class="content-section px-4 py-2">
+        <legend class="border-bottom mb-4 fs-2">Tasklist</legend>
+        <div class="input-group">
+            <button class="btn btn-outline-info new-task-btn px-lg-5" user_id="{{ current_user.id }}"><i class="bi bi-plus-lg"></i></button>   
+            <input class="form-control form-control-lg" id="newInput{{ current_user.id }}" placeholder="Add a new task">
+        </div>
+    </div>
+    <ul class="list-group p-4" id="taskList">
+        {% for task in tasks %}
+            <li class="task list-group-item p-4" id="taskSection{{ task.id }}" position="{{ task.position }}" task_id="{{ task.id }}">
+                <div class="row">
+                    <button class="btn btn-outline-info edit-task-btn col-auto mx-3 px-3" task_id="{{ task.id }}" type="submit" ><i class="bi bi-check-lg"></i></button>
+                    <input class="edit-task form-control form-control-lg col mx-4" task_id="{{ task.id }}" id="taskInput{{ task.id }}" value="{{ task.description }}">
+                    <button class="btn btn-outline-danger delete-task-btn col-auto mx-3 px-3" task_id="{{ task.id }}" type="submit"><i class="bi bi-x-lg"></i></button>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}

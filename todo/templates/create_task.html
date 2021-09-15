@@ -1,0 +1,11 @@
+<ul class="list-group p-4" id="taskList">
+    {% for task in tasks %}
+        <li class="task list-group-item p-4" id="taskSection{{ task.id }}" position="{{ task.position }}" task_id="{{ task.id }}">
+            <div class="row">
+                <button class="btn btn-outline-info edit-task-btn col-auto mx-3 px-3" task_id="{{ task.id }}" type="submit" ><i class="bi bi-check-lg"></i></button>
+                <input class="edit-task form-control form-control-lg col mx-4" task_id="{{ task.id }}" id="taskInput{{ task.id }}" value="{{ task.description }}">
+                <button class="btn btn-outline-danger delete-task-btn col-auto mx-3 px-3" task_id="{{ task.id }}" type="submit"><i class="bi bi-x-lg"></i></button>
+            </div>
+        </li>
+    {% endfor %}
+</ul>

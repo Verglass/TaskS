@@ -1,5 +1,7 @@
 from todo import db, login_manager
+from flask import current_app
 from flask_login import UserMixin
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
 
 @login_manager.user_loader
@@ -14,15 +16,29 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(60), unique=False, nullable=False)
     tasks = db.relationship("Task", back_populates="author", lazy=True)
 
+    def get_reset_token(self, expires_sec=1800):
+        s = Serializer(current_app.config["SECRET_KEY"], expires_sec)
+        return s.dumps({"user_id": self.id}).decode("utf-8")
+
+    @staticmethod
+    def verify_reset_token(token):
+        s = Serializer(current_app.config["SECRET_KEY"])
+        try:
+            user_id = s.loads(token)["user_id"]
+        except:
+            return None
+        return User.query.get(user_id)
+
     def __repr__(self):
         return f"User('{self.username}', '{self.email}')"
 
 
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    description = db.Column(db.Text, unique=False, nullable=True)
+    description = db.Column(db.Text, default="", unique=False, nullable=True)
+    position = db.Column(db.Integer, default=0, unique=False, nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     author = db.relationship("User", back_populates="tasks")
 
     def __repr__(self):
-        return f"Task('{self.description}')"
+        return f"Task('{self.description}', '{self.author}')"

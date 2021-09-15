@@ -1,0 +1,45 @@
+:root {
+  --clr-primary: #032830;
+  --clr-secondary: #fefefe;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+header {
+  background-color: var(--clr-primary);
+  color: var(--clr-secondary);
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-link {
+  color: var(--clr-secondary);
+}
+
+.nav-link:focus,
+.nav-link:active,
+.nav-link:hover {
+  color: var(--clr-secondary) !important;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+main {
+  background-color: var(--clr-secondary);
+}
+
+.nav-item a {
+  color: var(--clr-secondary);
+}
+
+legend,
+h1 {
+  color: var(--clr-primary);
+}

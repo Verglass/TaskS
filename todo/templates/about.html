@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="p-lg-5">
+        <h1 class="text-center border-bottom pb-3">
+            <span class="fw-bold tltle">TaskS</span> - task tracking made simple
+        </h1>
+        <div class="content-section d-flex">
+            <div class="text-black-50 fs-3 p-4 mx-4">
+                <p class="m-4 px-4">
+                    TaskS is a simple webapp meant for people who just want to track their daily tasks without any of the hassles that come with the mainstream alternatives.
+                </p>
+            </div>
+            <div class="d-flex justify-content-center m-5">
+                <form>
+                    <button class="btn btn-outline-info fs-4 fw-bold px-lg-5 py-4" formaction="{{ url_for('users.register') }}">Sign Up Now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
